@@ -17,4 +17,4 @@ Currently, VFd only works with Intel 82599 NICs (Niantic). However, the software
 
 The github site will be the location where most VFd design and user documentation will be archived. In addition, VFd development can be followed at the following places.
 
-VFd Users mailing list: to subscribe, send email to vfd-users+subscribe@googlegroups.com with the word subscribe in the subject line or <a href="mailto:@googlegroups.com?subject=subscribe">Click Here</a>.
+VFd Users mailing list: to subscribe, send email to vfd-users+subscribe@googlegroups.com with the word subscribe in the subject line or <a href="mailto:vfd-users+subscribe@googlegroups.com?subject=subscribe">Click Here</a>.
