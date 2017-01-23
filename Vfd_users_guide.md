@@ -545,7 +545,16 @@ the  strip_stag  field  **  must ** be set to _false_ as when
 there are multiple IDs supplied it is impossible for the  NIC 
 to know which ID to insert on outbound traffic. 
  
-**macs:**  Is an array of one or more MAC addresses which VFd 
+**macs:** Is an array of one or more MAC addresses which VFd 
+will configure on the VF. Any MAC addresses placed  into  the
+array  act  as a whitelist and outbound (Tx) packets from the
+guest with any listed MAC address as the source will  not  be
+blocked.  The MAC address assigned to the VF is automatically
+included in the list by VFd, and thus does ** not ** need  to
+be supplied, therefore it is valid to have an empty MAC list.
+
+
+Is an array of one or more MAC addresses which VFd 
 will configure on the VF. It is generally  **not**  necessary 
 to configure any MAC addresses. 
  
@@ -784,7 +793,8 @@ versions.
 _____________________________________________________________
  
 [1] A basic primer on SR-IOV can be found at 
-http://www.intel.com/content/dam/doc/application-note/pci-sig-sr-iov-primer-sr-iov-technology-paper.pdf 
+//www.intel.com/content/dam/doc/application-note/pci-sig-sr-iov-primer-sr-iov-technology-paper.pdf 
+This link was 'scrubbed' as it might be causing account flagging when the page is replaced. 
  
  
  
