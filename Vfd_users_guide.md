@@ -346,21 +346,21 @@ The traffic class definition object  contains  the  following
 fields: 
  
  
-**  name :** The traffic class name (future and/or diagnostic 
+**name :** The traffic class name (future and/or diagnostic 
 output). 
  
-** pri :** The priority of the traffic class (0 - 3  where  0 
+**pri :** The priority of the traffic class (0 - 3  where  0 
 is the lowest). 
  
-** lsp :** When true, sets link strict priority on the class. 
+**lsp :** When true, sets link strict priority on the class. 
  
-** bst :** When true, sets bandwidth group strict priority on 
+**bst :** When true, sets bandwidth group strict priority on 
 the class. 
  
-** max_bw :** Maximum amount of  bandwidth  as  a  percentage 
+**max_bw :** Maximum amount of  bandwidth  as  a  percentage 
 (future). 
  
-**  min_bw  :**  Minimum  amount of bandwidth as a percentage 
+**min_bw  :**  Minimum  amount of bandwidth as a percentage 
 (future). 
  
  
