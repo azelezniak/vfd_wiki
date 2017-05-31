@@ -571,20 +571,24 @@ from.
 **vfid:** Is the ID  number  (0-31)  of  the  VF  on  the  PF 
 supplied by the pciid. 
  
-**vlans:** Is an array of one or more VLAN IDs which VFd will 
-configure on the VF. When more than one VLAN ID is  supplied, 
-the  <code>  strip_stag  </code> field ** must ** be set to _ 
-false_  as  when  there  are  multiple  IDs  supplied  it  is 
-impossible for the NIC to know which ID to insert on outbound 
-traffic. 
  
-**macs:** Is an array of one or more MAC addresses which  VFd 
-will  configure  on the VF. Any MAC addresses placed into the 
-array act as a whitelist and outbound (Tx) packets  from  the 
-guest  with  any listed MAC address as the source will not be 
-blocked. The MAC address assigned to the VF is  automatically 
-included  in the list by VFd, and thus does ** not ** need to 
-be supplied, therefore it is valid to have an empty MAC list. 
+**vlans:** Is an array of one or more VLAN IDs which VFd will
+configure on the VF. VLAN IDs  are  used  to  direct  inbound
+traffic  to  the  VF.  The IDs may be removed (stripped) from
+packets on ingress, and inserted into packets on egress based
+on  a combination of the contensts of this array based on the
+<code> strip_stag </code> field. The VLAN  Stripping  section
+later  in this document contains more details about how these
+two fields work together.
+
+**macs:** Is an array of one or more MAC addresses which  VFd
+will  configure  on  the VF. The list acts as a whitelist for
+outbound  (Tx)  packets;  packets  with  a  MAC  address  not
+appearing  in the list will be marked as spoofed and dropped.
+The first address in the array is made the  default  address,
+and  will be visible to the guest when it queries the device.
+If an empty list is provided, the address assigned by the  PF
+driver will be used as the default.
  
 **start_cb:** Is a command (script) which VFd will execute as 
 the  last  step  in the VFd start up process. (See section on 
@@ -794,14 +798,14 @@ When running with QoS disabled,  it  should  be  possible  to
 configure any number of VFs from 1 through 32. 
  
  
-## MAC Limits 
-The  number  of MAC addresses which may be defined across all 
-VFs for a PF is limited by hardware to 128. When  this  limit 
-is  reached VFd will refuse to allow a VF configuration to be 
-added (the result of the <code>  iplex  add  </code>  command 
-will  be  an  error).  Hardware also limits the number of MAC 
-addresses which may be supplied for a single VF to 64. 
- 
+## MAC Limits
+The number of MAC addresses which may be defined  across  all
+VFs  for  a PF is limited by hardware to 128. When this limit
+is reached VFd will refuse to allow a VF configuration to  be
+added  (the  result  of  the <code> iplex add </code> command
+will be an error). Hardware also limits  the  number  of  MAC
+addresses which may be supplied for a single VF to 63.
+
  
 ## VLAN ID Limits 
 In a similar fashion to the MAC limits, the  hardware  limits 
@@ -1033,11 +1037,13 @@ generating the desired .pdf or .md versions of  the  document
 using {X}fm. 
 _____________________________________________________________
  
-**Source:** vfd_hackers.xfm 
- 
-**Original:** 12 April 2016 
- 
-**Revised:** 26 January 2017 
- 
-**Formatter:** tfm V2.2/0a266 
+**Source:** vfd_hackers.xfm
+
+**Original:** 12 April 2016
+
+**Revised:** 31 May 2017
+
+**Formatter:** tfm V2.2/0a266
+
+
  
