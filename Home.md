@@ -10,8 +10,11 @@ VFd (SR-IOV Virtual Function driver) is a daemon which manages the configuration
 In the future, the following additional capabilities are being developed for configuration through VFd
 
 * Network QoS: bandwidth allocation, prioritization, and rate limiting
-* Packet mirroring from one VF to another
 * Improved analytics interface to report basic packet level statistics on PF and VFs
+
+Recently completed enhancements:
+
+* Packet mirroring from one VF to another
 
 Currently, VFd only works with Intel 82599 NICs (Niantic). However, the software is intended to be NIC agnostic going forward, with support for additional NICs coming in the future. 
 
