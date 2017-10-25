@@ -4,23 +4,20 @@
 
 # About VFd
 
-VFd (SR-IOV Virtual Function driver) is a daemon which manages the configuration of virtual and physical functions (VFs and PFs) which are exposed by an SR-IOV capable network interface card (NIC) using the DPDK PMD interface. Configuration and management is accomplished via DPDK and allows a very lightweight and simple overlay to be constructed for cloud environments. Currently, the following attributes can be controlled:
+VFd (SR-IOV Virtual Function driver) is a lightweight SRIOV "hypervisor"; a daemon that manages the configuration and resources of virtual and physical functions (VFs and PFs) which are exposed by an SR-IOV capable network interface card (NIC) using the DPDK PMD interface. Configuration and management is accomplished via DPDK and allows a very lightweight and simple overlay to be constructed for cloud environments. Currently, the following attributes can be controlled:
 
 * VLAN and MAC filtering (inbound)
 * Stripping of VLAN ID (single) from inbound traffic
 * Addition of VLAN ID (single) to outbound traffic
 * Enabling/disabling broadcast, multicast, unicast
-
-In the future, the following additional capabilities are being developed for configuration through VFd
-
 * Network QoS: bandwidth allocation, prioritization, and rate limiting
-* Improved analytics interface to report basic packet level statistics on PF and VFs
+* Analytics interface to report packet level statistics on PF and VFs
 
 Recently completed enhancements:
 
-* Packet mirroring from one VF to another
+* Packet mirroring from one VF to another to support debugging (e.g., using tcpdump) and monitoring
 
-Currently, VFd only works with Intel 82599 NICs (Niantic). However, the software is intended to be NIC agnostic going forward, with support for additional NICs coming in the future. 
+Currently, VFd only works with Intel 82599 10GbE NICs (Niantic) with experimental support for 25GbE Intel Fortville and Broadcom NetXtreme NICs. The software is intended to be NIC agnostic, with support for additional NICs coming in the future. 
 
 # Contacts
 
