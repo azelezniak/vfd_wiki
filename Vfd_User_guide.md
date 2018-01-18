@@ -21,9 +21,9 @@ to be controlled:
  
 * VLAN and MAC filtering (inbound) 
   
-* Stripping of VLAN ID (single) from inbound traffic 
+* Stripping of VLAN ID from inbound traffic 
   
-* Addition of VLAN ID (single) to outbound traffic 
+* Addition of VLAN ID to outbound traffic 
   
 * Enabling/disabling broadcast, multicast, unicast 
  
@@ -588,7 +588,10 @@ appearing  in the list will be marked as spoofed and dropped.
 The first address in the array is made the  default  address,
 and  will be visible to the guest when it queries the device.
 If an empty list is provided, the address assigned by the  PF
-driver will be used as the default.
+driver will be used as the default. Appication attached to VF
+can change default MAC address as well as add additional MAC 
+addresses using appropriate Linux commands or DPDK APIs, but 
+total number of MACs should not exeed maximum allowed.
  
 **start_cb:** Is a command (script) which VFd will execute as 
 the  last  step  in the VFd start up process. (See section on 
@@ -613,12 +616,18 @@ VLAN tag as each packet is transmitted.  Both  functions  are
 set  with  the  same  <code> strip_stag </code> field; as the 
 strip and insert operations are related, they are both either 
 enabled  or  disabled  and  thus only one field is necessary. 
-When this field is set to <code> true, </code> the  array  of 
-VLAN  IDs  must  contain only a single ID as it is impossible 
-for the NIC to know which VLAN ID to insert if  multiple  IDs 
-are  defined  in  the  array.  Thus,  VFd  will  reject  the  
-configuration if the strip stag field is set to <code>  true, 
-</code> and the VLAN array has more than one element. 
+When this field is set to <code> true, </code> and  array  of 
+VLAN  IDs  contains single ID, VLAN tag  will be stripped  on
+inbound and VLAN ID vlue will be placed into RX descriptor. On 
+transmittion the same value will be inserted. If array of VLAN
+IDs contains more than one ID, VLAN tags will be stripped and 
+values will be placed into RX descriptor. During transmittion 
+NIC will insert VLAN tag values from packet's TX descriptor, 
+thus application requires to place proper value into TX 
+descriptor and set appropriate flags. If VLAN ID in the TX 
+descriptod doesn't match those configured in the VLAN array, 
+packet with wrong VLAN ID will be dropped and <code> spoofed 
+</code> counter will be incremented.
  
  
 ### VF Quality of service configuration 
